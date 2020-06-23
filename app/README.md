@@ -1,8 +1,4 @@
-# Project 1
+# Booker-Slum
 
-Web Programming with Python and JavaScript
 
-goodreads
-
-key: qbLSeCSz4HUoLAxlhiVyQ
-secret: HDoO7865RFDW1mRayzvqLYsEIUHOavYUmCTe2SXYPk
+This is official repository of Booker Slum licensed under the terms of MIT License.
