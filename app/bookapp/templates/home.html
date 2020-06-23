@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+
+  	<div class="bg">
+  		<div style="margin-top: 1vh;color: white;display: inline-block;margin-bottom: 15vh;">
+  		<h1 class="font-weight-lighter" style="text-align: center;"> Search Books... Authors... ISBNs... year.. Read them ... Write Reviews and Give your Ratings </h1>
+  	</div>
+		<form class="example" action="{{ url_for('search') }}" method="GET">
+		  <input type="text" placeholder="Search.." name="book">
+		  <button type="submit"><i class="fa fa-search"></i></button>
+		</form>
+	</div>
+
+
+
+
+
+
+	<style type="text/css">
+		.bg{
+			margin-top: 10vh;
+			height: 100%;
+		}
+
+		 body,html{
+			    height: 100vh;
+			    width: 100%;
+			    margin: 0;
+			    padding: 0;
+			
+			    }
+		
+	
+		* {
+			  box-sizing: border-box;
+			}
+
+			/* Style the search field */
+			form.example input[type=text] {
+			  padding: 10px;
+			  font-size: 17px;
+			  border: 1px solid grey;
+			  float: left;
+			  width: 50%;
+			  background: #f1f1f1;
+			  margin-left: 15%;
+			}
+
+			/* Style the submit button */
+			form.example button {
+			  float: left;
+			  width: 10%;
+			  padding: 10px;
+			  background: #2196F3;
+			  color: white;
+			  font-size: 17px;
+			  border: 1px solid grey;
+			  border-left: none; /* Prevent double borders */
+			  cursor: pointer;
+			}
+
+			form.example button:hover {
+			  background: #0b7dda;
+			}
+
+			/* Clear floats */
+			form.example::after {
+			  content: "";
+			  clear: both;
+			  display: table;
+			}
+			    
+			  
+	</style>
+
+
+{% endblock %}

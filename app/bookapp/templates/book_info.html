@@ -1,0 +1,239 @@
+{% extends "layout.html" %}
+
+{% block title %}
+		{{ book.title }}
+{% endblock %}
+
+{% block content %}
+
+	 <div class="row bookdetails" style="background-color: white;color: black;">
+				<div class="col-sm-2">
+						<img src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" class="img-rounded">
+						<br><br> 
+				</div>
+				<div class="col-sm-10 bookdata">
+						<div class="row data">
+								<div class="col-sm-6">
+										<h1>{{book.title}}</h1>
+										<h5>Author: {{book.author}}</h5>
+										<h5>Published: {{book.year}}</h5>
+										<h5>ISBN-10: {{book.isbn}}</h5>
+										<form method="POST" action="{{ url_for('cart', id=session.get('user_id')) }}">
+											<button class="btn btn-primary" value="{{ book.isbn }}" name="add" type="submit">Save for later</button>
+										</form>
+								</div>
+
+								<!--GOODREADS REVIEWS -->
+								<div class="col-sm-6">
+										<img class="mb-3" src="../static/logo/goodreads_logo.jpg" alt="Goodreads" width="200" height="45">
+										<h5>ISBN-13 : {{ greads.isbn13 }}</h5>
+										<h5>Nº of Ratings: {{greads.work_ratings_count}}</h5>
+										<h5>Average Rating: {{greads.average_rating}}</h5>
+										<h5>
+												<a href="https://www.goodreads.com/search?q={{book.title}}">Go to Goodreads website</a>
+										</h5>
+								</div>
+						</div>
+						
+				</div>
+				
+		</div>
+
+
+		<div class="formdiv">
+				<fieldset>
+						<form method="POST" action="">
+								<legend>Write to your Review</legend>
+							<div class="form-group">
+								<label for="title">Title:</label>
+								<input type="text" class="form-control" id="title" name="title">
+							</div>
+							<div class="form-group">
+								<label for="content">Review:</label>
+								<textarea name="review" class="form-control"></textarea>
+							</div>
+							<div class="rating">
+									 <label>
+										<input type="radio" name="stars" value="1" />
+										<span class="icon">★</span>
+									</label>
+									<label>
+										<input type="radio" name="stars" value="2" />
+										<span class="icon">★</span>
+										<span class="icon">★</span>
+									</label>
+									<label>
+										<input type="radio" name="stars" value="3" />
+										<span class="icon">★</span>
+										<span class="icon">★</span>
+										<span class="icon">★</span>   
+									</label>
+									<label>
+										<input type="radio" name="stars" value="4" />
+										<span class="icon">★</span>
+										<span class="icon">★</span>
+										<span class="icon">★</span>
+										<span class="icon">★</span>
+									</label>
+									<label>
+										<input type="radio" name="stars" value="5" />
+										<span class="icon">★</span>
+										<span class="icon">★</span>
+										<span class="icon">★</span>
+										<span class="icon">★</span>
+										<span class="icon">★</span>
+									</label>
+							</div>
+							<br>
+							<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+						 </form>
+				
+				</fieldset>
+
+				
+		</div>
+														<br><br><br>
+		<div class="review">
+				<h2 style="text-align: center;">Reviews</h2><br><br>
+				{% if num==0 %}
+				<h5 class="alert alert-danger" style="text-align: center;">Sorry! this book is not reviewed by anyone yet.</h5>
+				{% endif %}
+				{% for rev in results %}
+						<article class="media content-section reviews"  style="background-color: #0F2027">
+							 <div class="media-body">
+								 <div class="article-metadata">
+									 <h5 class="mr-2">{{ rev['username'] }}</h5>
+									 <small class="text-muted" style="margin-right: 0px;"><h5>Date : </h5>{{ rev.time.strftime("%m/%d/%Y, %H:%M:%S") }} GMT+5:30</small>
+								 </div>
+								 <h2><a class="article-title">{{ rev.title }}</a></h2>
+								 <p class="article-content">{{ rev.review }}</p>
+								 <br>
+								 <p class="article-content">Rated : {{ rev.rating }}</p>
+							 </div>
+						 </article>
+						 <br><br>
+				{% endfor %}
+				
+		</div>
+
+
+		<script type="text/javascript">
+				$(':radio').change(function() {
+					console.log('New star rating: ' + this.value);
+				});
+		</script>
+
+		<style type="text/css">
+			*{
+					box-sizing: border-box;
+			}
+			body{
+				color: white;
+			}
+			.bookdetails{
+					padding: 30px;
+					border-top: solid 6px black;
+					border-left: solid 6px black;
+					border-right: solid 1px black;
+					border-bottom: solid 1px black;
+					border-radius: 20px;
+					margin: 20px 15px 15px 15px; 
+
+			}
+			.data{
+					border-bottom: solid 6px black;
+					border-right: solid 6px black;
+					border-left: solid 1px black;
+					border-top: solid 1px black;
+					border-radius: 20px;
+					 padding: 30px;
+			 }
+			.formdiv{
+					width: 80%;
+					margin-left: 10%;
+					border: solid 1px black;
+					border-bottom: solid 4px black;
+					border-radius: 10px;
+					padding: 40px;
+			}
+
+
+			.rating {
+				display: inline-block;
+				position: relative;
+				height: 37px;
+				line-height: 37px;
+				font-size: 37px;
+			}
+
+			.rating label {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				cursor: pointer;
+			}
+
+			.rating label:last-child {
+				position: static;
+			}
+
+			.rating label:nth-child(1) {
+				z-index: 5;
+			}
+
+			.rating label:nth-child(2) {
+				z-index: 4;
+			}
+
+			.rating label:nth-child(3) {
+				z-index: 3;
+			}
+
+			.rating label:nth-child(4) {
+				z-index: 2;
+			}
+
+			.rating label:nth-child(5) {
+				z-index: 1;
+			}
+
+			.rating label input {
+				position: absolute;
+				top: 0;
+				left: 0;
+				opacity: 0;
+			}
+
+			.rating label .icon {
+				float: left;
+				color: transparent;
+			}
+
+			.rating label:last-child .icon {
+				color: gray;
+			}
+
+			.rating:not(:hover) label input:checked ~ .icon,
+			.rating:hover label:hover input ~ .icon {
+				color: yellow;
+			}
+
+			.rating label input:focus:not(:checked) ~ .icon:last-child {
+				color: gray;
+				text-shadow: 0 0 5px yellow;
+			}
+
+			.reviews{
+				width: 90%;
+				border: 1px 1px 1px 1px;
+				border-radius: 10px;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+				margin-left: 5%;
+				margin-right: 5%; 
+				padding: 4px 10px 5px 10px;
+				background-color: #e6e6e6;
+			}
+		</style>
+
+{% endblock %}

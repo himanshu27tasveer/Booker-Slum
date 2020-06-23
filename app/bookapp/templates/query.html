@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+  
+  <div style="background-color: black;color: white;margin: 20px 0 auto auto;text-align: center;font-size: 24px;font-family: monospace;"> No. of Results loaded : {{ results }}</div>
+
+    {% for book in books %}
+    <div class="card">
+      <h2>{{ book.title }}</h2>
+      <p class="price">Author : {{ book.author }}</p>
+      <p><button><a href="{{ url_for('book_info', id=book.id) }}" style="color: white">View Book</a></button></p>
+    </div>
+    {% endfor %}
+
+
+
+<style type="text/css">
+  html{
+        scroll-behavior: smooth;
+      }
+     
+      .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      margin: 20px auto 20px auto;
+      text-align: center;
+      font-family: arial;
+    }
+
+    .price {
+      color: grey;
+      font-size: 22px;
+    }
+
+    .card button {
+      border: none;
+      outline: 0;
+      padding: 12px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+
+    .card button:hover {
+      opacity: 0.7;
+    }
+</style>
+
+{% endblock %}

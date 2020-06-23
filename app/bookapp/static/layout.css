@@ -1,0 +1,56 @@
+/* layout.html  */
+
+ body{
+	background: #0F2027;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.site-footer
+{
+
+  background-color:#292b2c;
+  padding:10px auto 5px auto;
+  font-size:15px;
+  line-height:24px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;s
+}
+
+.about{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	margin: auto 20px 20px 20px;
+}
+.footer-links{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	background-color: #ffffff00;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
