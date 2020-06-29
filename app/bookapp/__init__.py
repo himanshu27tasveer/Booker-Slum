@@ -5,9 +5,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail
+from flask_sitemap import Sitemap
 
 
 app = Flask(__name__)
+ext = Sitemap(app=app)
 
 bcrypt = Bcrypt()
 # Check for environment variable
@@ -29,15 +31,15 @@ Session(app)
 
 # Set up database
 
+
 engine = create_engine(os.environ['DATABASE_URL'])
 
 db = scoped_session(sessionmaker(bind=engine))
 bcrypt.init_app(app)
 
 
-
 from app.bookapp import routes
 
-
-
-
+@ext.register_generator
+def index():
+    yield 'index', {}
