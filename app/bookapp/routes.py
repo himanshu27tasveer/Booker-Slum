@@ -2,7 +2,7 @@ import os, json
 import secrets
 import requests
 from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify
-from app.bookapp import app, db, bcrypt, mail
+from app.bookapp import app, db, bcrypt, mail, ext
 from flask_mail import Message
 from app.bookapp.forms import RequestResetForm, ResetPasswordForm, ReviewForm
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
@@ -48,6 +48,11 @@ def validate_email(email):
 @app.route('/home')
 def home():
 	return render_template("home.html", title='Booker-Slum')
+
+
+@ext.register_generator
+def index():
+    yield 'home', {}
 
 
 

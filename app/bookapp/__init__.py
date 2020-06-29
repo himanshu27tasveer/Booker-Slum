@@ -40,6 +40,3 @@ bcrypt.init_app(app)
 
 from app.bookapp import routes
 
-@ext.register_generator
-def index():
-    yield 'index', {}
