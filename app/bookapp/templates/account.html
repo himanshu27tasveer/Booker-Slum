@@ -10,7 +10,7 @@
 	{% for book in books %}
 		<div class="column">
 			<div class="card" style="width: 18rem;border: none;">
-			  <img src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" class="card-img-top" alt="Image not available" height="50%">
+			  <img src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" class="card-img-top" alt="Image not available for {{ book.title }}" height="50%">
 			  <div class="card-body">
 			    <h5 class="card-title">{{book.title}}</h5>
 			    <p class="card-text">ISBN-10 :{{ book.isbn}}</p>

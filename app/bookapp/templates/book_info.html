@@ -8,7 +8,7 @@
 
 	 <div class="row bookdetails" style="background-color: white;color: black;">
 				<div class="col-sm-2">
-						<img src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" class="img-rounded">
+						<img src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" class="img-rounded" alt="Image not available for {{ book.title }}">
 						<br><br> 
 				</div>
 				<div class="col-sm-10 bookdata">
@@ -25,7 +25,7 @@
 
 								<!--GOODREADS REVIEWS -->
 								<div class="col-sm-6">
-										<img class="mb-3" src="../static/logo/goodreads_logo.jpg" alt="Goodreads" width="200" height="45">
+										<img class="mb-3" src="../static/logo/goodreads_logo.jpg" alt="Goodreads logo" width="200" height="45">
 										<h5>ISBN-13 : {{ greads.isbn13 }}</h5>
 										<h5>Nº of Ratings: {{greads.work_ratings_count}}</h5>
 										<h5>Average Rating: {{greads.average_rating}}</h5>
