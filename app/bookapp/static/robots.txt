@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Allow: /sitemap.htm
+Allow: https://booker-slum.herokuapp.com/sitemap.html
 Sitemap: https://booker-slum.herokuapp.com/sitemap.xml
