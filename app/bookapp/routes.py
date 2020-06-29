@@ -1,8 +1,8 @@
 import os, json
 import secrets
 import requests
-from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify
-from app.bookapp import app, db, bcrypt, mail, ext
+from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify, send_from_directory
+from app.bookapp import app, db, bcrypt, mail
 from flask_mail import Message
 from app.bookapp.forms import RequestResetForm, ResetPasswordForm, ReviewForm
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
@@ -43,16 +43,20 @@ def validate_email(email):
 		return True
 
 
+@app.route('/robots.txt')
+@app.route('/sitemap.xml')
+@app.route('/sitemap.htm')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
+
+
+
 
 @app.route('/')
 @app.route('/home')
 def home():
 	return render_template("home.html", title='Booker-Slum')
 
-
-@ext.register_generator
-def index():
-    yield 'home', {}
 
 
 

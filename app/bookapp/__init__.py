@@ -5,11 +5,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail
-from flask_sitemap import Sitemap
 
 
-app = Flask(__name__)
-ext = Sitemap(app=app)
+app = Flask(__name__, static_folder='static', static_url_path='')
 
 bcrypt = Bcrypt()
 # Check for environment variable
