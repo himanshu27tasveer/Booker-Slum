@@ -4,7 +4,7 @@ import requests
 from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify, send_from_directory
 from app.bookapp import app, db, bcrypt, mail
 from flask_mail import Message
-from app.bookapp.forms import RequestResetForm, ResetPasswordForm, ReviewForm
+from app.bookapp.forms import RequestResetForm, ResetPasswordForm, ReviewForm, RegistrationForm, LoginForm
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import pytz
 from datetime import datetime
@@ -29,19 +29,6 @@ def login_required(f):
 	return decorated_function
 
 
-def validate_username(username):
-		user = db.execute("SELECT * FROM users WHERE username = :username",{"username":username}).fetchone()
-		if user:
-			raise ValidationError('Username is already taken. Please choose a different one.')
-		else:
-			return True
-def validate_email(email):
-	user = db.execute("SELECT * FROM users WHERE email = :email",{"email":email}).fetchone()
-	if user:
-		raise ValidationError('Email is already taken. Please choose a different one.')
-	else:
-		return True
-
 
 @app.route('/robots.txt')
 @app.route('/sitemap.xml')
@@ -62,22 +49,14 @@ def home():
 
 @app.route("/register", methods=['GET','POST'])
 def register():
-	if request.method == 'POST':
-		name = request.form.get("name")
-		username = request.form.get("username")
-		email = request.form.get("email")
-		password = request.form.get("password")
-		confpassword = request.form.get("confpassword")
-		if password == confpassword:
-			if validate_username(username) and validate_email(email):
-				hashed_pass = bcrypt.generate_password_hash(password).decode()
-				user = db.execute("INSERT INTO users (name, username, email, password) VALUES (:name ,:username, :email, :password)", {"name":name,"username":username, "email":email, "password":hashed_pass})
-				db.commit()
-				flash('Account has been created, You can now login', 'success')
-				return redirect( url_for('login') )
-		else:
-			flash('Password do not match', 'danger')
-	return render_template("register.html", title='Sign Up')
+	form = RegistrationForm()
+    if form.validate_on_submit():
+        hashed_pass = bcrypt.generate_password_hash(form.password.data).decode()
+        user = db.execute("INSERT INTO users (name, username, email, password) VALUES (:name ,:username, :email, :password)", {"name":form.name.data,"username":form.username.data, "email":form.email.data, "password":hashed_pass})
+        db.commit()
+        flash('Account has been created, You can now login', 'success')
+        return redirect( url_for('login') )
+	return render_template("register.html", title='Sign Up', form=form)
 
 
 @app.route("/login", methods=['GET','POST'])
