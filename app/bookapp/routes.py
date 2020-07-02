@@ -70,7 +70,7 @@ def login():
 			session["user_id"] = user.id
 			session["user_name"] = user.username
 			flash('Successfully Logged in', 'success')
-			return redirect(url_for('home'))
+			return redirect(next_page) if next_page else redirect(url_for('home'))
 		else:
 			flash("Login Failed", 'danger')
 	return render_template("login.html", title='Login', form=form)
