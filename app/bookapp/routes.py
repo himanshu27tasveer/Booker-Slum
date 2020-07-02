@@ -34,7 +34,7 @@ def login_required(f):
 @app.route('/sitemap.xml')
 @app.route('/sitemap.htm')
 def static_from_root():
-    return send_from_directory(app.static_folder, request.path[1:])
+	return send_from_directory(app.static_folder, request.path[1:])
 
 
 
@@ -50,12 +50,12 @@ def home():
 @app.route("/register", methods=['GET','POST'])
 def register():
 	form = RegistrationForm()
-    if form.validate_on_submit():
-        hashed_pass = bcrypt.generate_password_hash(form.password.data).decode()
-        user = db.execute("INSERT INTO users (name, username, email, password) VALUES (:name ,:username, :email, :password)", {"name":form.name.data,"username":form.username.data, "email":form.email.data, "password":hashed_pass})
-        db.commit()
-        flash('Account has been created, You can now login', 'success')
-        return redirect( url_for('login') )
+	if form.validate_on_submit():
+		hashed_pass = bcrypt.generate_password_hash(form.password.data).decode()
+		user = db.execute("INSERT INTO users (name, username, email, password) VALUES (:name ,:username, :email, :password)", {"name":form.name.data,"username":form.username.data, "email":form.email.data, "password":hashed_pass})
+		db.commit()
+		flash('Account has been created, You can now login', 'success')
+		return redirect( url_for('login') )
 	return render_template("register.html", title='Sign Up', form=form)
 
 
