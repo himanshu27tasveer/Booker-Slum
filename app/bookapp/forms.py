@@ -7,7 +7,6 @@ from app.bookapp import db
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Login')
 
 
 class RegistrationForm(FlaskForm):
