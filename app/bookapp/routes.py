@@ -61,7 +61,7 @@ def register():
 def login():
 	session.clear()
 	form = LoginForm()
-	if request.method == 'POST' and form.validate_on_submit():
+	if request.method == 'POST' or form.validate_on_submit():
 		user = db.execute("SELECT * FROM users WHERE email = :email",{"email":form.email.data}).fetchone()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
 			next_page = request.args.get('next') 
