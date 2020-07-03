@@ -4,6 +4,11 @@ from wtforms.validators import DataRequired, EqualTo, Length, Email, ValidationE
 from app.bookapp import db
 
 
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(),Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')
+
 
 class RegistrationForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(),Length(min=2, max=20)])
@@ -22,10 +27,6 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('Email is already taken. Please choose a different one.')
 
-class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(),Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Login')
 
 
 class RequestResetForm(FlaskForm):
