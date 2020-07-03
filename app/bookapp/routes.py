@@ -60,7 +60,7 @@ def register():
 @app.route("/login", methods=['GET','POST'])
 def login():
 	session.clear()
-	form = LoginForm()
+	form = LoginForm(request.form)
 	if form.validate_on_submit():
 		user = db.execute("SELECT * FROM users WHERE email = :email",{"email":form.email.data}).fetchone()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
