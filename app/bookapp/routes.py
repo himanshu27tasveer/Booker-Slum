@@ -32,7 +32,7 @@ def login_required(f):
 
 @app.route('/robots.txt')
 @app.route('/sitemap.xml')
-@app.route('/sitemap.htm')
+@app.route('/sitemap.html')
 def static_from_root():
 	return send_from_directory(app.static_folder, request.path[1:])
 
@@ -63,7 +63,7 @@ def register():
 def login():
 	session.clear()
 	form = LoginForm()
-	if form.validate_on_submit() or request.method == 'POST':
+	if form.validate_on_submit():
 		user = db.execute("SELECT * FROM users WHERE email = :email",{"email":form.email.data}).fetchone()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
 			next_page = request.args.get('next') 
