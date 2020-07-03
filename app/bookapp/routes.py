@@ -62,7 +62,7 @@ def login():
 	session.clear()
 	form = LoginForm()
 	if form.validate_on_submit():
-		user = db.execute("SELECT * FROM users WHERE username = :username",{"email":form.useranme.data}).fetchone()
+		user = db.execute("SELECT * FROM users WHERE username = :username",{"username":form.useranme.data}).fetchone()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
 			next_page = request.args.get('next') 
 			session["user_id"] = user.id
