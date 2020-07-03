@@ -4,17 +4,15 @@ import requests
 from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify, send_from_directory
 from app.bookapp import app, db, bcrypt, mail
 from flask_mail import Message
-from app.bookapp.forms import RequestResetForm, ResetPasswordForm, ReviewForm, RegistrationForm, LoginForm
+from app.bookapp.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, ReviewForm
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import pytz
 from datetime import datetime
 from wtforms.validators import ValidationError
+from functools import wraps
 
 tz_India = pytz.timezone('Asia/Kolkata')
 
-
-from flask import redirect, render_template, request, session
-from functools import wraps
 
 """ Decorator for Login Required """
 
