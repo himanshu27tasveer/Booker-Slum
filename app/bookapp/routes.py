@@ -202,8 +202,8 @@ def book_info(id):
 			bookrating = float(bookrating) 
 			bookreview = request.form.get("review")
 
-			db.execute("INSERT INTO reviews (review, user_id, book_id, rating, title, time, review_count) VALUES (:review, :user_id, :book_id, bookrating, :title, :time, 1)", 
-									{"isbn":bookisbn, "review":bookreview, "user_id":user_id, "book_id":book_id,"title":booktitle, "time":datetime.now(tz_India)})
+			db.execute("INSERT INTO reviews (review, user_id, book_id, rating, title, time, review_count) VALUES (:review, :user_id, :book_id, :rating, :title, :time, 1)", 
+									{"isbn":bookisbn, "review":bookreview, "user_id":user_id, "book_id":book_id,"rating":bookrating, "title":booktitle, "time":datetime.now(tz_India)})
 			db.commit()
 
 		else:
