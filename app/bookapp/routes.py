@@ -195,12 +195,15 @@ def book_info(id):
 		flash('Please Login again', 'danger')
 		return redirect(url_for('home'))
 	if request.method == 'POST':
+		book_rev = db.execute("SELECT review_count FROM reviews WHERE isbn=:isbn",{"isbn":book.isbn}).fetchone()
 		booktitle = request.form.get('title')
 		bookrating = request.form.get("stars")
 		bookrating = int(bookrating)
 		bookreview = request.form.get("review")
-		db.execute("INSERT INTO reviews (review, user_id, book_id, rating, title, time) VALUES (:review, :user_id, :book_id, :rating, :title, :time)", 
-								{"isbn":bookisbn, "review":bookreview, "user_id":user_id, "book_id":book_id, "rating":bookrating, "title":booktitle, "time":datetime.now(tz_India)})
+
+		bookreviewcnt = int(book_rev.review_count) + 1
+		db.execute("INSERT INTO reviews (review, user_id, book_id, rating, title, time, review_count) VALUES (:review, :user_id, :book_id, :rating, :title, :time, :review_count)", 
+								{"isbn":bookisbn, "review":bookreview, "user_id":user_id, "book_id":book_id, "rating":bookrating, "title":booktitle, "time":datetime.now(tz_India), "review_count":bookreviewcnt})
 		db.commit()
 		return redirect("/book_info/" + str(book_id))
 	else:
@@ -265,7 +268,7 @@ def api_call(isbn):
 					"author": book.author,
 					"year": book.year,
 					"isbn": book.isbn,
-					"review_count": book.ratings_count,
+					"review_count": book.review_count,
 					"average_score": book.rating
 				}
 		result['average_score'] = float('%.2f'%(result['average_score']))
