@@ -258,15 +258,16 @@ def api_call(isbn):
 				"average_score": 0
 			}
 			return jsonify(result)
+	else:
+		book = row.fetchone()
+		result = {
+					"title": book.title,
+					"author": book.author,
+					"year": book.year,
+					"isbn": book.isbn,
+					"review_count": book.ratings_count,
+					"average_score": book.rating
+				}
+		result['average_score'] = float('%.2f'%(result['average_score']))
 
-	result = {
-				"title": book.title,
-				"author": book.author,
-				"year": book.year,
-				"isbn": book.isbn,
-				"review_count": book.ratings_count,
-				"average_score": book.rating
-			}
-	result['average_score'] = float('%.2f'%(result['average_score']))
-
-	return jsonify(result)
+		return jsonify(result)
