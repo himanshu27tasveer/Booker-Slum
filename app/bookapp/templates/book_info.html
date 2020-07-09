@@ -25,7 +25,7 @@
 
 								<!--GOODREADS REVIEWS -->
 								<div class="col-sm-6">
-										<img class="mb-3" src="../static/logo/goodreads_logo.jpg" alt="Goodreads logo" width="200" height="45">
+										<img class="mb-3" src="{{ url_for('static', filename='logo/goodreads_logo.jpg') }}" alt="Goodreads logo" width="200" height="45">
 										<h5>ISBN-13 : {{ greads.isbn13 }}</h5>
 										<h5>Nº of Ratings: {{greads.work_ratings_count}}</h5>
 										<h5>Average Rating: {{greads.average_rating}}</h5>
