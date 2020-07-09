@@ -195,7 +195,7 @@ def book_info(id):
 		flash('Please Login again', 'danger')
 		return redirect(url_for('home'))
 	if request.method == 'POST':
-		book_rev = db.execute("SELECT review_count, rating FROM reviews WHERE isbn=:isbn",{"isbn":book.isbn}).fetchone()
+		book_rev = db.execute("SELECT review_count, rating FROM reviews WHERE book_id=:id",{"id":id}).fetchone()
 		booktitle = request.form.get('title')
 		bookrating = request.form.get("stars")
 		bookrating = float(book_rev.rating) + float(bookrating) 
