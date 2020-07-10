@@ -221,7 +221,7 @@ def book_info(id):
 			res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": os.environ['GREADS_API'], "isbns": bookisbn})
 			greads = res.json()
 			greads = greads['books'][0]
-			response = db.execute("SELECT users.username, review, rating, time FROM users INNER JOIN reviews ON users.id = reviews.user_id WHERE book_id = :book ORDER BY time", {"book": book_id})
+			response = db.execute("SELECT users.username, review, title, rating, time FROM users INNER JOIN reviews ON users.id = reviews.user_id WHERE book_id = :book ORDER BY time", {"book": book_id})
 
 			results = response.fetchall()
 
