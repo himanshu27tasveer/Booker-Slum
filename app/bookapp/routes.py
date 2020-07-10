@@ -23,7 +23,7 @@ def login_required(f):
 		if session.get("user_id") is None:
 			if request.args.get("next"):
 				flash('You need to Login First', 'danger')
-				return redirect(url_for('login', request.args.get("next")))
+				return redirect(url_for('login', next=request.args.get("next")))
 			else:
 				flash('You need to Login First', 'danger')
 				return redirect(url_for('login'))
@@ -71,7 +71,7 @@ def login(next):
 	if request.method == 'POST' or form.validate_on_submit():
 		user = db.execute("SELECT * FROM users WHERE email = :email",{"email":form.email.data}).fetchone()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
-			next_page = request.args.get('next') 
+			next_page = next 
 			session["user_id"] = user.id
 			session["user_name"] = user.username
 			flash('Successfully Logged in', 'success')
