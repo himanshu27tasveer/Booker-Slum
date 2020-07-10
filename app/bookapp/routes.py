@@ -196,26 +196,13 @@ def book_info(id):
 		flash('Please Login again', 'danger')
 		return redirect(url_for('home'))
 	if request.method == 'POST':
-		book_rev = db.execute("SELECT * FROM reviews WHERE book_id=:id",{"id":book_id})
 		booktitle = request.form.get('title')
 		bookrating = request.form.get("stars")
-		if book_rev.rowcount == 0:
-			bookrating = float(bookrating) 
-			bookreview = request.form.get("review")
-
-			db.execute("INSERT INTO reviews (review, user_id, book_id, rating, title, time, review_count) VALUES (:review, :user_id, :book_id, :rating, :title, :time, 1)", 
-									{"isbn":bookisbn, "review":bookreview, "user_id":user_id, "book_id":book_id,"rating":bookrating, "title":booktitle, "time":datetime.now(tz_India)})
-			db.commit()
-
-		else:
-			book_rev = book_rev.fetchone()
-			bookrating = float(book_rev.rating) + int(bookrating) 
-			bookreview = request.form.get("review")
-
-			bookreviewcnt = float(book_rev.review_count) + 1
-			db.execute("INSERT INTO reviews (review, user_id, book_id, rating, title, time, review_count) VALUES (:review, :user_id, :book_id, :rating, :title, :time, :review_count)", 
-									{"isbn":bookisbn, "review":bookreview, "user_id":user_id, "book_id":book_id, "rating":bookrating, "title":booktitle, "time":datetime.now(tz_India), "review_count":bookreviewcnt})
-			db.commit()
+		bookrating = int(bookrating) 
+		bookreview = request.form.get("review")
+		db.execute("INSERT INTO reviews (review, user_id, book_id, rating, title, time, review_count) VALUES (:review, :user_id, :book_id, :rating, :title, :time, :review_count)", 
+								{"isbn":bookisbn, "review":bookreview, "user_id":user_id, "book_id":book_id, "rating":bookrating, "title":booktitle, "time":datetime.now(tz_India), "review_count":bookreviewcnt})
+		db.commit()
 		return redirect("/book_info/" + str(book_id))
 	else:
 		try:
