@@ -21,8 +21,12 @@ def login_required(f):
 	@wraps(f)
 	def decorated_function(*args, **kwargs):
 		if session.get("user_id") is None:
-			flash('You need to Login First', 'danger')
-			return redirect(url_for('login', request.args.get("next"), *request.args))
+			if request.args.get("next"):
+				flash('You need to Login First', 'danger')
+				return redirect(url_for('login', request.args.get("next")))
+			else:
+				flash('You need to Login First', 'danger')
+				return redirect(url_for('login'))
 		return f(*args, **kwargs)
 	return decorated_function
 
@@ -58,9 +62,10 @@ def register():
 
 
 
-@app.route("/login", defaults={'next':''}, methods=['GET','POST'])
-@app.route("/login/<string:next>", methods=['GET','POST'])
-def login():
+
+@app.route("/login", defaults={'next': None} ,methods=['GET','POST'])
+@app.route("/login/<next>", methods=['GET','POST'])
+def login(next):
 	session.clear()
 	form = LoginForm()
 	if request.method == 'POST' or form.validate_on_submit():

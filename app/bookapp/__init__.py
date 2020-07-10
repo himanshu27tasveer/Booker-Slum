@@ -7,6 +7,7 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail
 
 
+
 app = Flask(__name__, static_folder='static', static_url_path='')
 
 bcrypt = Bcrypt()
@@ -26,6 +27,7 @@ app.config['MAIL_PASSWORD'] = os.environ['EMAIL_PASS']
 mail = Mail(app)
 
 Session(app)
+
 
 # Set up database
 
