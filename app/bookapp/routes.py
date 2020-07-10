@@ -57,11 +57,12 @@ def register():
 	return render_template("register.html", title='Sign Up', form=form)
 
 
+
 @app.route("/login", methods=['GET','POST'])
 def login():
 	session.clear()
 	form = LoginForm()
-	if request.method == 'POST' or form.validate_on_submit():
+	if form.validate_on_submit() or request.method == 'POST':
 		user = db.execute("SELECT * FROM users WHERE email = :email",{"email":form.email.data}).fetchone()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
 			next_page = request.args.get('next') 
