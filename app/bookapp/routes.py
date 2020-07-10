@@ -22,7 +22,7 @@ def login_required(f):
 	def decorated_function(*args, **kwargs):
 		if session.get("user_id") is None:
 			flash('You need to Login First', 'danger')
-			return redirect(url_for('login'))
+			return redirect(url_for('login', request.args.get("next")))
 		return f(*args, **kwargs)
 	return decorated_function
 
