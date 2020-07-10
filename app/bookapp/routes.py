@@ -207,7 +207,7 @@ def book_info(id):
 			db.commit()
 
 		else:
-
+			book_rev = book_rev.fetchone()
 			bookrating = float(book_rev.rating) + int(bookrating) 
 			bookreview = request.form.get("review")
 
