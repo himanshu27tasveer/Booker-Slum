@@ -200,8 +200,8 @@ def book_info(id):
 		bookrating = request.form.get("stars")
 		bookrating = int(bookrating) 
 		bookreview = request.form.get("review")
-		db.execute("INSERT INTO reviews (review, user_id, book_id, rating, title, time, review_count) VALUES (:review, :user_id, :book_id, :rating, :title, :time, :review_count)", 
-								{"isbn":bookisbn, "review":bookreview, "user_id":user_id, "book_id":book_id, "rating":bookrating, "title":booktitle, "time":datetime.now(tz_India), "review_count":bookreviewcnt})
+		db.execute("INSERT INTO reviews (review, user_id, book_id, rating, title, time) VALUES (:review, :user_id, :book_id, :rating, :title, :time)", 
+								{"isbn":bookisbn, "review":bookreview, "user_id":user_id, "book_id":book_id, "rating":bookrating, "title":booktitle, "time":datetime.now(tz_India)})
 		db.commit()
 		return redirect("/book_info/" + str(book_id))
 	else:
