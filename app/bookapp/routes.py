@@ -21,12 +21,8 @@ def login_required(f):
 	@wraps(f)
 	def decorated_function(*args, **kwargs):
 		if session.get("user_id") is None:
-			if request.args.get("next"):
-				flash('You need to Login First', 'danger')
-				return redirect(url_for('login', next=request.args.get("next")))
-			else:
-				flash('You need to Login First', 'danger')
-				return redirect(url_for('login'))
+			flash('You need to Login First', 'danger')
+			return redirect(url_for('login'))
 		return f(*args, **kwargs)
 	return decorated_function
 
@@ -61,17 +57,14 @@ def register():
 	return render_template("register.html", title='Sign Up', form=form)
 
 
-
-
-@app.route("/login", defaults={'next': None} ,methods=['GET','POST'])
-@app.route("/login/<next>", methods=['GET','POST'])
-def login(next):
+@app.route("/login", methods=['GET','POST'])
+def login():
 	session.clear()
 	form = LoginForm()
 	if request.method == 'POST' or form.validate_on_submit():
 		user = db.execute("SELECT * FROM users WHERE email = :email",{"email":form.email.data}).fetchone()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
-			next_page = next 
+			next_page = request.args.get('next') 
 			session["user_id"] = user.id
 			session["user_name"] = user.username
 			flash('Successfully Logged in', 'success')
