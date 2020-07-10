@@ -58,7 +58,7 @@ def register():
 
 
 
-@app.route("/login, defaults={'next': None}", methods=['GET','POST'])
+@app.route("/login", defaults={'next':''}, methods=['GET','POST'])
 @app.route("/login/<string:next>", methods=['GET','POST'])
 def login():
 	session.clear()
