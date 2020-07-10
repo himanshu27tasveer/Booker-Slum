@@ -22,7 +22,7 @@ def login_required(f):
 	def decorated_function(*args, **kwargs):
 		if session.get("user_id") is None:
 			flash('You need to Login First', 'danger')
-			return redirect(url_for('login', request.args.get("next")))
+			return redirect(url_for('login', request.args.get("next"), *request.args))
 		return f(*args, **kwargs)
 	return decorated_function
 
@@ -57,7 +57,9 @@ def register():
 	return render_template("register.html", title='Sign Up', form=form)
 
 
-@app.route("/login", methods=['GET','POST'])
+
+@app.route("/login, defaults={'next': None}", methods=['GET','POST'])
+@app.route("/login/<string:next>", methods=['GET','POST'])
 def login():
 	session.clear()
 	form = LoginForm()
