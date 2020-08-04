@@ -18,8 +18,6 @@ if not os.environ["DATABASE_URL"]:
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.config["SESSION_COOKIE_SECURE"] = True
-app.config["SESSION_COOKIE_SAMESITE"] = 'None'
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
