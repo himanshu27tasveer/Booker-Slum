@@ -4,7 +4,7 @@ import requests
 from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify, send_from_directory
 from app.bookapp import app, db, bcrypt, mail
 from flask_mail import Message
-from bookapp.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, ReviewForm
+from app.bookapp.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, ReviewForm
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import pytz
 from datetime import datetime
