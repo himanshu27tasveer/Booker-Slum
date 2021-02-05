@@ -25,10 +25,14 @@
 
 								<!--GOODREADS REVIEWS -->
 								<div class="col-sm-6">
-										<img class="mb-3" src="{{ url_for('static', filename='logo/goodreads_logo.jpg') }}" alt="Goodreads logo" width="200" height="45">
-										<h5>ISBN-13 : {{ greads.isbn13 }}</h5>
+										Data from <img class="mb-3" src="{{ url_for('static', filename='logo/goodreads_logo.jpg') }}" alt="Goodreads logo" width="200" height="45"> 
+										<p class="alert-danger" style="text-align: center;">Regrets! due to</p>
+										<p>
+											{{greads}}
+										</p>
+										<!-- <h5>ISBN-13 : {{ greads.isbn13 }}</h5>
 										<h5>Nº of Ratings: {{greads.work_ratings_count}}</h5>
-										<h5>Average Rating: {{greads.average_rating}}</h5>
+										<h5>Average Rating: {{greads.average_rating}}</h5> -->
 										<h5>
 												<a href="https://www.goodreads.com/search?q={{book.title}}">Go to Goodreads website</a>
 										</h5>

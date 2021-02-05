@@ -4,7 +4,7 @@ import requests
 from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify, send_from_directory
 from app.bookapp import app, db, bcrypt, mail
 from flask_mail import Message
-from app.bookapp.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, ReviewForm
+from bookapp.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, ReviewForm
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import pytz
 from datetime import datetime
@@ -208,9 +208,11 @@ def book_info(id):
 		return redirect("/book_info/" + str(book_id))
 	else:
 		try:
-			res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": os.environ['GREADS_API'], "isbns": bookisbn})
-			greads = res.json()
-			greads = greads['books'][0]
+			# res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": os.environ['GREADS_API'], "isbns": bookisbn})
+			# greads = res.json()
+			# greads = greads['books'][0]
+			greads = 'Goodreads has deactivated the Goodreads API developer key associated with your Goodreads account due to inactivity. As of December 8th 2020, as part of our overall commitment to continually improve our data management, Goodreads no longer issues new developer keys for our public developer API and has deactivated API keys not used in the prior 30 days. Goodreads plans to retire the current version of these tools, and will be assessing the value of APIs to determine support in the future.'
+
 			response = db.execute("SELECT users.username, review, title, rating, time FROM users INNER JOIN reviews ON users.id = reviews.user_id WHERE book_id = :book ORDER BY time", {"book": book_id})
 
 			results = response.fetchall()

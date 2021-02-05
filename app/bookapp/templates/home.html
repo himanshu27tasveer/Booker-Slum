@@ -5,11 +5,11 @@
 
 
   	<div class="bg">
-  		<div style="margin-top: 1vh;color: white;display: inline-block;margin-bottom: 15vh;">
-  		<h1 class="font-weight-lighter" style="text-align: center;"> Search Books... Authors... ISBNs... year.. Read them ... Write Reviews and Give your Ratings </h1>
-  	</div>
+  		<div style="margin-top: 1vh;color: white;display: inline-block;margin-bottom: 15vh;text-align: center;width: 100%">
+  			<h1 class="font-weight-lighter" style="text-align: center;"> Search Books... Authors... ISBNs... year.. Read them ... Write Reviews and Give your Ratings </h1>
+  		</div>
 		<form class="example" action="{{ url_for('search') }}" method="GET">
-		  <input type="text" placeholder="Search.." name="book">
+		  <input type="text" placeholder="Search......" name="book">
 		  <button type="submit"><i class="fa fa-search"></i></button>
 		</form>
 		<div>
@@ -25,7 +25,8 @@
 
 	<style type="text/css">
 		.bg{
-			margin-top: 10vh;
+			margin-top: 20vh;
+			margin-bottom: 20vh;
 			height: 100%;
 		}
 
@@ -43,14 +44,19 @@
 			}
 
 			/* Style the search field */
+
+			.example{
+				
+			}
+
 			form.example input[type=text] {
 			  padding: 10px;
 			  font-size: 17px;
 			  border: 1px solid grey;
 			  float: left;
-			  width: 50%;
+			  width: 40%;
 			  background: #f1f1f1;
-			  margin-left: 15%;
+			  margin-left: 25%;
 			}
 
 			/* Style the submit button */

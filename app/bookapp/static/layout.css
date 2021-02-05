@@ -6,15 +6,16 @@
 	background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+
 .site-footer
 {
 
   background-color:#292b2c;
-  padding:10px auto 5px auto;
+  padding:10px 0px 5px 0px;
   font-size:15px;
   line-height:24px;
   border-top-left-radius: 20px;
-  border-top-right-radius: 20px;s
+  border-top-right-radius: 20px;
 }
 
 .about{

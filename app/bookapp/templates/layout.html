@@ -42,91 +42,105 @@
 	     
 	</head>
 	<body>
+		<div id="wrapper">
+			<div id="header">
+				
+				<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 100px;">
 
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-		    <a class="navbar-brand">Booker-Slum</a>
-		    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-		      <li class="nav-item link-h" style="">
-		        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-		      </li>
-		      {% if not session.get('user_id') %}
-		      	<li class="nav-item link-r">
-			      <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-			    </li>
-			    <li class="nav-item link-r">
-			      <a class="nav-link " href="{{ url_for('register') }}">Register</a>
-			    </li>
-		      {% else %}
-		      	<li class="nav-item link-r">
-			      <a class="nav-link" href="{{ url_for('account') }}"><i class="fa fa-shopping-cart" aria-hidden="true"> Saved Books</i></a>
-			    </li>
-			    <li class="nav-item link-r">
-			      <a class="nav-link " href="{{ url_for('logout') }}">Logout</a>
-			    </li>
-		      {% endif %}
-		    </ul>
-		  </div>
-
-		</nav>
-		<div>
-              {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                  {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}" style="z-index: 2;margin-top: 10px;width: 90%;margin-left: 5%;">
-                      {{ message }}
-                    </div>
-                  {% endfor %}
-                {% endif %}
-              {% endwith %}
-
-
-              {% block content %}
-              {% endblock %}
-              
-        </div>
-        <br><br><br>
-
-
-
-        <!-- Footer -->
-			
-        	<footer class="site-footer">
-        		
-        		<div class="about" style="color: #949494">
-		        	<h2>About</h2>
-		            <p class="text-justify" style="margin: auto 15% auto 15%;">Booker-Slum is based on flask and postgresql. Some of the parts of UI used in this project is taken from w3s Schools Bootstrap, codepen.io. This is an open source project. Improvements will be very much appreciated.</p>
-		         </div>
-		         <div>
-		         	<ul class="footer-links">
-		         		<li>
-		         			<a href="https://www.facebook.com/himanshu27.stu" class="btn-floating btn-lg btn-fb" type="button" role="button"><i class="fab fa-facebook-f" style="color: #4267B2;"></i></a>
-		         		</li>
-		         		<li>
-		         			<a href="https://www.twitter.com/imhimanshu27" class="btn-floating btn-lg btn-tw" type="button" role="button"><i class="fab fa-twitter" style="color: #00acee;"></i></a>
-		         		</li>
-		         		<li>
-		         			<a href="https://www.linkedin.com/in/im-himanshu27" class="btn-floating btn-lg btn-li" type="button" role="button"><i class="fab fa-linkedin-in" style="color: #0e76a8 ;"></i></a>
-		         		</li>
-		         		<li>
-		         			<a href="https://www.instagram.com/himanshu.tasveer" class="btn-floating btn-lg btn-ins" type="button" role="button"><i class="fab fa-instagram" style="color: #8a3ab9;"></i></a>
-		         		</li>
-		         		<li>
-		         			<a href="https://www.github.com/himanshu27tasveer" class="btn-floating btn-lg btn-git" type="button" role="button"><i class="fab fa-github" style="color: #ffffff ;"></i></a>
-		         		</li>
-		         	</ul>
-		         </div>
-		         <div class="footer-copyright text-center py-3" style="color: #5c5c5c">© 2020 Copyright:
-				    <a href="https://himanshu27tasveer.github.io"> Tasveer</a>
+				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+				    <span class="navbar-toggler-icon"></span>
+				  </button>
+				  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+				    <a class="navbar-brand" style="color: teal;font-family: monteserrate;font-size: 40px;border-bottom: 0.1px solid white;">Booker-Slum</a>
+				    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-5">
+				      <li class="nav-item ml-5 link-h">
+				        <a class="nav-link" href="{{ url_for('home') }}" style="font-size: 20px;width: 100%";height: 100%;>Home</a>
+				      </li>
+				      {% if not session.get('user_id') %}
+				      	<li class="nav-item ml-5 link-r">
+					      <a class="nav-link" href="{{ url_for('login') }}" style="font-size: 20px;width: 100%;height: 100%;">Login</a>
+					    </li>
+					    <li class="nav-item ml-5 link-r">
+					      <a class="nav-link " href="{{ url_for('register') }}" style="font-size: 20px;width: 100%;height: 100%;">Register</a>
+					    </li>
+				      {% else %}
+				      	<li class="nav-item ml-5 link-r">
+					      <a class="nav-link" href="{{ url_for('account') }}" style="font-size: 20px;width: 100%";height: 100%;><i class="fa fa-shopping-cart" aria-hidden="true"> Saved Books</i></a>
+					    </li>
+					    <li class="nav-item ml-5 link-r">
+					      <a class="nav-link " href="{{ url_for('logout') }}" style="font-size: 20px;width: 100%;height: 100%;">Logout</a>
+					    </li>
+				      {% endif %}
+				    </ul>
 				  </div>
 
-        	</footer>
+				</nav>
 
-		<!-- Footer -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+	                {% if messages %}
+	                  {% for category, message in messages %}
+	                    <div class="alert alert-{{ category }}" style="z-index: 2;margin-top: 10px;width: 90%;margin-left: 5%;">
+	                      {{ message }}
+	                    </div>
+	                  {% endfor %}
+	                {% endif %}
+              	{% endwith %}
+
+
+			</div>
+			<div id="content">
+				
+
+              	{% block content %}
+              	{% endblock %}
+
+			</div>
+			<div id="footer">
+				
+				<br><br><br>
+
+
+
+	        <!-- Footer -->
+				
+	        	<footer class="site-footer">
+	        		
+	        		<div class="about" style="color: #949494">
+			        	<h2>About</h2>
+			            <p class="text-justify" style="margin: auto 15% auto 15%;">Booker-Slum is based on flask and postgresql. Some of the parts of UI used in this project is taken from w3s Schools Bootstrap, codepen.io. This is an open source project. Improvements will be very much appreciated.</p>
+			         </div>
+			         <div>
+			         	<ul class="footer-links">
+			         		<li>
+			         			<a href="https://www.facebook.com/himanshu27.stu" class="btn-floating btn-lg btn-fb" type="button" role="button"><i class="fab fa-facebook-f" style="color: #4267B2;"></i></a>
+			         		</li>
+			         		<li>
+			         			<a href="https://www.twitter.com/imhimanshu27" class="btn-floating btn-lg btn-tw" type="button" role="button"><i class="fab fa-twitter" style="color: #00acee;"></i></a>
+			         		</li>
+			         		<li>
+			         			<a href="https://www.linkedin.com/in/im-himanshu27" class="btn-floating btn-lg btn-li" type="button" role="button"><i class="fab fa-linkedin-in" style="color: #0e76a8 ;"></i></a>
+			         		</li>
+			         		<li>
+			         			<a href="https://www.instagram.com/himanshu.tasveer" class="btn-floating btn-lg btn-ins" type="button" role="button"><i class="fab fa-instagram" style="color: #8a3ab9;"></i></a>
+			         		</li>
+			         		<li>
+			         			<a href="https://www.github.com/himanshu27tasveer" class="btn-floating btn-lg btn-git" type="button" role="button"><i class="fab fa-github" style="color: #ffffff ;"></i></a>
+			         		</li>
+			         	</ul>
+			         </div>
+			         <div class="footer-copyright text-center py-3" style="color: #5c5c5c">© 2020 Copyright:
+					    <a href="https://himanshu27tasveer.github.io"> Tasveer</a>
+					  </div>
+
+	        	</footer>
+
+			<!-- Footer -->
+
+			</div>
+              
+              
+        </div>
+        
 
 
 	</body>

@@ -1,3 +1,5 @@
 #Environment variables
 *.env
 *bookerSlum
+*Bs
+*bookapp/run.py
